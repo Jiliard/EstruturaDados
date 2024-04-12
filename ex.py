@@ -120,12 +120,11 @@ class lista():
     #feito
     def MostrarTudo(self):
         iterador = self.__prim
-        atual = 1
 
-        while atual <= self.__cont:
+        while True:
             print(iterador.getdado().getdado())
+            if iterador.getprox() == None: break
             iterador = iterador.getprox()
-            atual +=1
 
 p1 = objeto(1)
 p2 = objeto(2)
