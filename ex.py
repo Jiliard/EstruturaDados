@@ -29,7 +29,6 @@ class lista():
     def __init__(self):
         self.__prim = None
         self.__ult = None
-        self.__cont = 0
         self.__cursor = None
 
     #feito
@@ -51,13 +50,17 @@ class lista():
     def __irParaOUltimo(self):
         while self.__cursor.getProx() != None:
             self.__cursor = self.__cursor.getProx()
+
+    def __Vazio(self) -> bool:
+        if self.__prim == None:
+            return True
+        return False
     
     #feito
     def InserirComoPrimeiro(self, el):
         novo = objeto(el)
-        
 
-        if self.__cont == 0:
+        if self.__prim == None:
             self.__ult = novo
             self.__cursor = novo
 
@@ -65,13 +68,12 @@ class lista():
             novo.setprox(self.__prim)
 
         self.__prim = novo
-        self.__cont += 1
 
     #feito
     def InserirComoUltimo(self, el):
         novo = objeto(el)
 
-        if self.__cont == 0:
+        if self.__ult == None:
             self.__prim = novo
             self.__cursor = novo
 
@@ -79,7 +81,6 @@ class lista():
             self.__ult.setprox(novo)
 
         self.__ult = novo
-        self.__cont += 1
 
     #feito    
     def InserirNaPosicao(self, el, pos):
@@ -94,7 +95,6 @@ class lista():
 
         novo.setprox(iterador.getprox()) 
         iterador.setprox(novo)
-        self.__cont += 1
 
     #feito
     def InserirAntesDe(self, el, ref):
@@ -106,7 +106,6 @@ class lista():
 
         novo.setprox(iterador.getprox()) 
         iterador.setprox(novo)
-        self.__cont += 1
 
     #feito
     def InserirDepoisDe(self, el, ref):
@@ -118,17 +117,15 @@ class lista():
 
         novo.setprox(iterador.getprox()) 
         iterador.setprox(novo)
-        self.__cont += 1
 
     #feito
     def RemoverPrimeiro(self):
-        if self.__cont == 0:
+        if self.__Vazio():
             print("EXCEÇÃO")
 
         else:
             aux = self.__prim.getprox()
             self.__prim = aux
-            self.__cont -= 1
 
     #feito
     def RemoverUltimo(self):
@@ -138,7 +135,6 @@ class lista():
             iterador = iterador.getprox()
 
         iterador = self.__ult
-        self.__cont -= 1
 
     #feito
     def AcessaPrimeiro(self):
