@@ -3,18 +3,25 @@ class objeto():
     def __init__(self, dado):
         self.__dado = dado
         self.__prox = None
+        self.__anter = None
     
-    def getdado(self):
+    def getDado(self):
         return self.__dado
 
-    def setdado(self, dado):
+    def setDado(self, dado):
         self.__dado = dado
     
-    def getprox(self):
+    def getProx(self):
         return self.__prox
 
-    def setprox(self, prox):
+    def setProx(self, prox):
         self.__prox = prox
+
+    def getAnter(self):
+        return self.__anter
+    
+    def setAnter(self, anter):
+        self.__anter = anter
 
 
 class lista():
@@ -28,16 +35,22 @@ class lista():
     #feito
     def __avancarKPosicoes(self, k):
         for i in range(k):
-            self.__cursor = self.__cursor.getprox()
+            self.__cursor = self.__cursor.getProx()
 
+    #feito
     def __retrocederKPosicoes(self, k):
-        pass
+        for i in range(k):
+            self.__cursor = self.__cursor.getAnter()
 
+    #feito
     def __irParaOPrimeiro(self):
-        pass
+        while self.__cursor.getAnter() != None:
+            self.__cursor = self.__cursor.getAnter()
 
+    #feito
     def __irParaOUltimo(self):
-        pass
+        while self.__cursor.getProx() != None:
+            self.__cursor = self.__cursor.getProx()
     
     #feito
     def InserirComoPrimeiro(self, el):
