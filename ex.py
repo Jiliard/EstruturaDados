@@ -23,13 +23,30 @@ class lista():
         self.__prim = None
         self.__ult = None
         self.__cont = 0
+        self.__cursor = None
+
+    #feito
+    def __avancarKPosicoes(self, k):
+        for i in range(k):
+            self.__cursor = self.__cursor.getprox()
+
+    def __retrocederKPosicoes(self, k):
+        pass
+
+    def __irParaOPrimeiro(self):
+        pass
+
+    def __irParaOUltimo(self):
+        pass
     
     #feito
     def InserirComoPrimeiro(self, el):
         novo = objeto(el)
+        
 
         if self.__cont == 0:
             self.__ult = novo
+            self.__cursor = novo
 
         else:
             novo.setprox(self.__prim)
@@ -43,6 +60,7 @@ class lista():
 
         if self.__cont == 0:
             self.__prim = novo
+            self.__cursor = novo
 
         else:
             self.__ult.setprox(novo)
@@ -111,33 +129,28 @@ class lista():
 
     #feito
     def AcessaPrimeiro(self):
-        return self.__prim.getdado().getdado()
+        return self.__prim.getdado()
     
     #feito
     def AcessaUltimo(self):
-        return self.__ult.getdado().getdado()
+        return self.__ult.getdado()
     
     #feito
     def MostrarTudo(self):
         iterador = self.__prim
 
         while True:
-            print(iterador.getdado().getdado())
+            print(iterador.getdado())
             if iterador.getprox() == None: break
             iterador = iterador.getprox()
 
-p1 = objeto(1)
-p2 = objeto(2)
-p3 = objeto(3)
-p4 = objeto(4)
-p5 = objeto(5)
-
 lista = lista()
 
-lista.InserirComoUltimo(p1)
+lista.InserirComoUltimo(1)
 
-lista.InserirComoUltimo(p2)
+lista.InserirComoUltimo(2)
 
-lista.InserirComoUltimo(p3)
+lista.InserirComoUltimo(3)
 
 lista.MostrarTudo()
+
