@@ -31,6 +31,22 @@ class lista():
         self.__ult = None
         self.__cursor = None
 
+    def buscar(self, ref):
+        self.__irParaOPrimeiro()
+
+        while self.__cursor.getDado() != ref:
+            self.__avancarKPosicoes(1)
+
+        return True
+
+    def ExcluirAtual (self):
+        #falta definir onde está o cursor, outro método 'buscar'
+        prox = self.__cursor.getProx()
+        ant = self.__cursor.getAnter()
+        prox.setAnter(ant)
+        ant.setProx(prox)
+        self.__cursor = prox
+
     #feito
     def __avancarKPosicoes(self, k):
         for i in range(k):
