@@ -152,10 +152,35 @@ class lista():
 
     #feito
     def ExcluirDaPos(self, pos):
-        self.__irParaOPrimeiro    
+        self.__irParaOPrimeiro()    
         self.__avancarKPosicoes(pos)
 
         self.ExcluirAtual()
+
+    def Buscar(self, el):
+        self.__irParaOPrimeiro()
+
+        while True:
+            if self.__cursor.getDado() == el:
+                return True
+            
+            if self.__cursor == self.__ult:
+                break
+            
+            self.__avancarKPosicoes(1)
+
+        return False
+    
+    #feito
+    def PosicaoDe(self, el):
+        self.__irParaOPrimeiro()
+        contador = 0;
+        while True:
+            if self.__cursor.getDado() == el:
+                return contador
+            
+            self.__avancarKPosicoes(1)
+            contador += 1
 
     #feito
     def AcessaPrimeiro(self):
