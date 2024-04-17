@@ -29,7 +29,7 @@ class lista():
     def __init__(self):
         self.__prim = None
         self.__ult = None
-        self.__cursor = N
+        self.__cursor = None
       
     #feito
     def __avancarKPosicoes(self, k):
@@ -55,6 +55,10 @@ class lista():
         if self.__prim == None:
             return True
         return False
+    
+    #feito
+    def acessarAtual(self):
+        return self.__cursor.getDado()
     
     #feito
     def InserirComoPrimeiro(self, el):
@@ -97,43 +101,50 @@ class lista():
         iterador.setprox(novo)
 
     #feito
-    def InserirAntesDe(self, el, ref):
+    def InserirAntesDoAtual(self, el):
         novo = objeto(el)
-        iterador = self.__prim
 
-        while iterador.getprox().getdado().getdado() != ref:
-            iterador = iterador.getprox()
+        novo.setAnter(self.__cursor.getAnter())
+        novo.setProx(self.__cursor)
 
-        novo.setprox(iterador.getprox()) 
-        iterador.setprox(novo)
+        self.__cursor.getAnter().setProx(novo)
+        self.__cursor.setAnter(novo)
 
     #feito
-    def InserirDepoisDe(self, el, ref):
+    def InserirDepoisDoAtual(self, el):
         novo = objeto(el)
-        iterador = self.__prim
 
-        while iterador.getdado().getdado() != ref:
-            iterador = iterador.getprox()
+        novo.setAnter(self.__cursor)
+        novo.setProx(self.__cursor.getProx())
 
-        novo.setprox(iterador.getprox()) 
-        iterador.setprox(novo)
+        self.__cursor.getPro().setAnter(novo)
+        self.__cursor.setProx(novo)
 
     #feito
-    def RemoverPrimeiro(self):
+    def ExcluirAtual(self):
+        self.__cursor.getAnter().setProx(self.__cursor.getProx())
+        self.__cursor.getProx().setAnter(self.__cursor.getAnter())
+
+        self.__avancarKPosicoes(1)
+
+    #feito
+    def ExcluirPrim(self):
         if self.__Vazio():
             print("EXCEÇÃO")
 
         else:
             self.__prim = self.__prim.getprox()
-            self.__prim.setAnt(None)
+            if not self.__Vazio():
+                self.__prim.setAnt(None)
 
     #feito
-    def RemoverUltimo(self):
+    def ExcluirUlt(self):
         if self.__Vazio():
             print("Exceção")
         else:
             self.__ult = self.__ult.getAnter()
-            self.__ult.setProx(None)
+            if not self.__Vazio:
+                self.__ult.setProx(None)
 
     #feito
     def AcessaPrimeiro(self):
