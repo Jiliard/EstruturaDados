@@ -5,16 +5,16 @@ class objeto():
         self.__prox = None
         self.__anter = None
     
-    def getdado(self):
+    def getDado(self):
         return self.__dado
 
-    def setdado(self, dado):
+    def setDado(self, dado):
         self.__dado = dado
     
-    def getprox(self):
+    def getProx(self):
         return self.__prox
 
-    def setprox(self, prox):
+    def setProx(self, prox):
         self.__prox = prox
 
     def getAnter(self):
@@ -29,27 +29,8 @@ class lista():
     def __init__(self):
         self.__prim = None
         self.__ult = None
-        self.__cursor = None
-    
-    def buscar(self, ref):
-        self.__irParaOPrimeiro()
-
-        while self.__cursor.getDado() != ref:
-            self.__avancarKPosicoes(1)
-
-        return True
-    
-    def AcessarAtual(self):
-        return self.__cursor.getdado()
-
-    def ExcluirAtual (self):
-        #falta definir onde está o cursor, outro método 'buscar'
-        prox = self.__cursor.getProx()
-        ant = self.__cursor.getAnter()
-        prox.setAnter(ant)
-        ant.setProx(prox)
-        self.__cursor = prox
-
+        self.__cursor = N
+      
     #feito
     def __avancarKPosicoes(self, k):
         for i in range(k):
