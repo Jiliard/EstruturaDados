@@ -88,17 +88,9 @@ class lista():
 
     #feito    
     def InserirNaPosicao(self, el, pos):
-        novo = objeto(el)
-
-        iterador = self.__prim
-        atual = 2
-
-        while atual < pos:
-            iterador = iterador.getprox()
-            atual +=1
-
-        novo.setprox(iterador.getprox()) 
-        iterador.setprox(novo)
+        self.__irParaOPrimeiro()
+        self.__avancarKPosicoes(pos)
+        self.InserirAntesDoAtual(el)
 
     #feito
     def InserirAntesDoAtual(self, el):
@@ -145,6 +137,16 @@ class lista():
             self.__ult = self.__ult.getAnter()
             if not self.__Vazio:
                 self.__ult.setProx(None)
+
+    #feito, mas em duvida
+    def ExcluirElemento(self, el):
+        self.__irParaOPrimeiro
+        while True:
+            if self.__cursor.getDado() == el:
+                self.ExcluirAtual()
+                break
+            self.__avancarKPosicoes(1)
+            
 
     #feito
     def AcessaPrimeiro(self):
