@@ -138,15 +138,24 @@ class lista():
             if not self.__Vazio:
                 self.__ult.setProx(None)
 
-    #feito, mas em duvida
+    #feito
     def ExcluirElemento(self, el):
         self.__irParaOPrimeiro
         while True:
             if self.__cursor.getDado() == el:
                 self.ExcluirAtual()
+
+            if self.__cursor == self.__ult:
                 break
+
             self.__avancarKPosicoes(1)
-            
+
+    #feito
+    def ExcluirDaPos(self, pos):
+        self.__irParaOPrimeiro    
+        self.__avancarKPosicoes(pos)
+
+        self.ExcluirAtual()
 
     #feito
     def AcessaPrimeiro(self):
