@@ -29,8 +29,8 @@ class lista():
     def __init__(self):
         self.__prim = None
         self.__ult = None
-        self.__cursor = None
-
+        self.__cursor = N
+      
     #feito
     def __avancarKPosicoes(self, k):
         for i in range(k):
