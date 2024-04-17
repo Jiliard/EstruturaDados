@@ -124,17 +124,16 @@ class lista():
             print("EXCEÇÃO")
 
         else:
-            aux = self.__prim.getprox()
-            self.__prim = aux
+            self.__prim = self.__prim.getprox()
+            self.__prim.setAnt(None)
 
     #feito
     def RemoverUltimo(self):
-        iterador = self.__prim
-
-        while iterador.getprox() != self.__ult:
-            iterador = iterador.getprox()
-
-        iterador = self.__ult
+        if self.__Vazio():
+            print("Exceção")
+        else:
+            self.__ult = self.__ult.getAnter()
+            self.__ult.setProx(None)
 
     #feito
     def AcessaPrimeiro(self):
