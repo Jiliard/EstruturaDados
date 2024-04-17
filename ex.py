@@ -26,10 +26,12 @@ class objeto():
 
 class lista():
 
-    def __init__(self):
+    def __init__(self, tamanho = 30):
         self.__prim = None
         self.__ult = None
         self.__cursor = None
+        self.__tamanho = tamanho
+        self.__quantidade = 0
       
     #feito
     def __avancarKPosicoes(self, k):
@@ -56,6 +58,11 @@ class lista():
             return True
         return False
     
+    def __Cheio(self) -> bool:
+        if self.__quantidade >= self.__tamanho:
+            return True
+        return False
+    
     #feito
     def acessarAtual(self):
         return self.__cursor.getDado()
@@ -73,6 +80,8 @@ class lista():
 
         self.__prim = novo
 
+        self.__quantidade += 1
+
     #feito
     def InserirComoUltimo(self, el):
         novo = objeto(el)
@@ -86,11 +95,15 @@ class lista():
 
         self.__ult = novo
 
+        self.__quantidade += 1
+
     #feito    
     def InserirNaPosicao(self, el, pos):
         self.__irParaOPrimeiro()
         self.__avancarKPosicoes(pos)
         self.InserirAntesDoAtual(el)
+
+        self.__quantidade += 1
 
     #feito
     def InserirAntesDoAtual(self, el):
@@ -102,6 +115,8 @@ class lista():
         self.__cursor.getAnter().setProx(novo)
         self.__cursor.setAnter(novo)
 
+        self.__quantidade += 1
+
     #feito
     def InserirDepoisDoAtual(self, el):
         novo = objeto(el)
@@ -112,12 +127,16 @@ class lista():
         self.__cursor.getPro().setAnter(novo)
         self.__cursor.setProx(novo)
 
+        self.__quantidade += 1
+
     #feito
     def ExcluirAtual(self):
         self.__cursor.getAnter().setProx(self.__cursor.getProx())
         self.__cursor.getProx().setAnter(self.__cursor.getAnter())
 
         self.__avancarKPosicoes(1)
+
+        self.__quantidade -= 1
 
     #feito
     def ExcluirPrim(self):
@@ -129,6 +148,8 @@ class lista():
             if not self.__Vazio():
                 self.__prim.setAnt(None)
 
+        self.__quantidade -= 1
+
     #feito
     def ExcluirUlt(self):
         if self.__Vazio():
@@ -137,6 +158,8 @@ class lista():
             self.__ult = self.__ult.getAnter()
             if not self.__Vazio:
                 self.__ult.setProx(None)
+
+        self.__quantidade -= 1
 
     #feito
     def ExcluirElemento(self, el):
@@ -150,12 +173,16 @@ class lista():
 
             self.__avancarKPosicoes(1)
 
+        self.__quantidade -= 1
+
     #feito
     def ExcluirDaPos(self, pos):
         self.__irParaOPrimeiro()    
         self.__avancarKPosicoes(pos)
 
         self.ExcluirAtual()
+
+        self.__quantidade -= 1
 
     def Buscar(self, el):
         self.__irParaOPrimeiro()
@@ -172,15 +199,20 @@ class lista():
         return False
     
     #feito
-    def PosicaoDe(self, el):
+    def PosicaoDe(self, el) -> int:
         self.__irParaOPrimeiro()
         contador = 0;
         while True:
             if self.__cursor.getDado() == el:
                 return contador
             
+            if self.__cursor == self.__ult:
+                print("Excecao")
+                break
+            
             self.__avancarKPosicoes(1)
             contador += 1
+        
 
     #feito
     def AcessaPrimeiro(self):
