@@ -76,7 +76,8 @@ class lista():
             self.__cursor = novo
 
         else:
-            novo.setprox(self.__prim)
+            novo.setProx(self.__prim)
+            self.__prim.setAnter(novo)
 
         self.__prim = novo
 
@@ -91,7 +92,7 @@ class lista():
             self.__cursor = novo
 
         else:
-            self.__ult.setprox(novo)
+            self.__ult.setProx(novo)
 
         self.__ult = novo
 
@@ -144,7 +145,7 @@ class lista():
             print("EXCEÇÃO")
 
         else:
-            self.__prim = self.__prim.getprox()
+            self.__prim = self.__prim.getProx()
             if not self.__Vazio():
                 self.__prim.setAnt(None)
 
@@ -201,7 +202,7 @@ class lista():
     #feito
     def PosicaoDe(self, el) -> int:
         self.__irParaOPrimeiro()
-        contador = 0;
+        contador = 0
         while True:
             if self.__cursor.getDado() == el:
                 return contador
@@ -216,20 +217,20 @@ class lista():
 
     #feito
     def AcessaPrimeiro(self):
-        return self.__prim.getdado()
+        return self.__prim.getDado()
     
     #feito
     def AcessaUltimo(self):
-        return self.__ult.getdado()
+        return self.__ult.getDado()
     
     #feito
     def MostrarTudo(self):
         iterador = self.__prim
 
         while True:
-            print(iterador.getdado())
-            if iterador.getprox() == None: break
-            iterador = iterador.getprox()
+            print(iterador.getDado())
+            if iterador.getProx() == None: break
+            iterador = iterador.getProx()
 
 lista = lista()
 
