@@ -50,7 +50,7 @@ class lista():
     def __irParaOPrimeiro(self):
         while self.__cursor.getAnter() != None:
             self.__cursor = self.__cursor.getAnter()
-
+        
     #feito
     def __irParaOUltimo(self):
         while self.__cursor.getProx() != None:
@@ -70,13 +70,14 @@ class lista():
     
     #feito
     def __PosicaoDe(self, el) -> int:
+        novo = objeto(el)
         self.__irParaOPrimeiro()
-        self.__ult.setProx(el)
+        self.__ult.setProx(novo)
 
         contador = 1
 
         while True:
-            if self.__cursor.getDado() == el.getDado():
+            if self.__cursor.getDado() == novo.getDado():
                 break
 
             contador += 1
@@ -109,6 +110,7 @@ class lista():
         self.__prim = novo
 
         self.__quantidade += 1
+        self.__cursor = novo
 
     #feito
     def InserirComoUltimo(self, el):
@@ -120,15 +122,17 @@ class lista():
 
         else:
             self.__ult.setProx(novo)
+            novo.setAnter(self.__ult)
 
         self.__ult = novo
 
         self.__quantidade += 1
+        self.__cursor = novo
 
     #feito    
     def InserirNaPosicao(self, el, pos):
         self.__irParaOPrimeiro()
-        self.__avancarKPosicoes(pos)
+        self.__avancarKPosicoes(pos - 1)
         self.InserirAntesDoAtual(el)
 
         self.__quantidade += 1
@@ -137,35 +141,48 @@ class lista():
     def InserirAntesDoAtual(self, el):
         novo = objeto(el)
 
-        novo.setAnter(self.__cursor.getAnter())
-        novo.setProx(self.__cursor)
+        if self.__cursor.getAnter() != None:
+            self.__cursor.getAnter().setProx(novo)
+            novo.setAnter(self.__cursor.getAnter())
+        
+        else:
+            self.__prim = novo
 
-        self.__cursor.getAnter().setProx(novo)
+        novo.setProx(self.__cursor)
         self.__cursor.setAnter(novo)
 
         self.__quantidade += 1
+        self.__cursor = novo
 
     #feito
     def InserirDepoisDoAtual(self, el):
         novo = objeto(el)
 
-        novo.setAnter(self.__cursor)
-        novo.setProx(self.__cursor.getProx())
+        if self.__cursor.getProx() != None:
+            self.__cursor.getProx().setAnter(novo)
+            novo.setProx(self.__cursor.getProx())
 
-        self.__cursor.getPro().setAnter(novo)
+        else:
+            self.__ult = novo
+
+        novo.setAnter(self.__cursor)
         self.__cursor.setProx(novo)
 
         self.__quantidade += 1
+        self.__cursor = novo
 
     #feito
     def ExcluirAtual(self):
-        self.__cursor.getAnter().setProx(self.__cursor.getProx())
-        self.__cursor.getProx().setAnter(self.__cursor.getAnter())
+        if self.__cursor.getProx() != None:
+            self.__cursor.getProx().setAnter(self.__cursor.getAnter())
+
+        if self.__cursor.getAnter() != None:
+            self.__cursor.getAnter().setProx(self.__cursor.getProx())      
 
         self.__avancarKPosicoes(1)
 
         self.__quantidade -= 1
-
+        
     #feito
     def ExcluirPrim(self):
         if self.__Vazio():
@@ -173,7 +190,7 @@ class lista():
 
         else:
             self.__prim = self.__prim.getProx()
-            self.__prim.setAnt(None)
+            self.__prim.setAnter(None)
 
         self.__quantidade -= 1
 
@@ -190,12 +207,13 @@ class lista():
 
     #feito
     def ExcluirElemento(self, el):
+        novo = objeto(el)
         self.__irParaOPrimeiro
 
-        self.__ult.setProx(el)
+        self.__ult.setProx(novo)
 
         while True:
-            if self.__cursor.getDado() == el.getDado():
+            if self.__cursor.getDado() == novo.getDado():
                 break
 
             self.__avancarKPosicoes(1)
@@ -221,11 +239,12 @@ class lista():
     #feito
     def Buscar(self, el):
         self.__irParaOPrimeiro()
+        novo = objeto(el)
 
-        self.__ult.setProx(el)
+        self.__ult.setProx(novo)
 
         while True:
-            if self.__cursor.getDado() == el.getDado():
+            if self.__cursor.getDado() == novo.getDado():
                 break
 
             self.__avancarKPosicoes(1)
@@ -258,10 +277,6 @@ class lista():
 
 lista = lista()
 
-lista.InserirComoUltimo(1)
-
+lista.InserirComoPrimeiro(1)
 lista.InserirComoUltimo(2)
-
-lista.InserirComoUltimo(3)
-
-lista.MostrarTudo()
+lista.InserirDepoisDoAtual(3)
