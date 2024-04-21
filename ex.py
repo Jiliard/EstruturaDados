@@ -53,11 +53,13 @@ class lista():
         while self.__cursor.getProx() != None:
             self.__cursor = self.__cursor.getProx()
 
+    #feito
     def __Vazio(self) -> bool:
         if self.__prim == None:
             return True
         return False
-    
+
+    #feito
     def __Cheio(self) -> bool:
         if self.__quantidade >= self.__tamanho:
             return True
@@ -146,8 +148,7 @@ class lista():
 
         else:
             self.__prim = self.__prim.getProx()
-            if not self.__Vazio():
-                self.__prim.setAnt(None)
+            self.__prim.setAnt(None)
 
         self.__quantidade -= 1
 
@@ -155,75 +156,95 @@ class lista():
     def ExcluirUlt(self):
         if self.__Vazio():
             print("Exceção")
+
         else:
             self.__ult = self.__ult.getAnter()
-            if not self.__Vazio:
-                self.__ult.setProx(None)
+            self.__ult.setProx(None)
 
         self.__quantidade -= 1
 
     #feito
     def ExcluirElemento(self, el):
         self.__irParaOPrimeiro
-        while True:
-            if self.__cursor.getDado() == el:
-                self.ExcluirAtual()
 
-            if self.__cursor == self.__ult:
+        self.__ult.setProx(el)
+
+        while True:
+            if self.__cursor.getDado() == el.getDado():
                 break
 
             self.__avancarKPosicoes(1)
 
-        self.__quantidade -= 1
+        if self.__cursor == self.__ult.getProx():
+            print("Exceção")
+
+        else:
+            self.ExcluirAtual()
+            self.__quantidade -= 1
+        
+        self.__ult.setProx(None)
 
     #feito
     def ExcluirDaPos(self, pos):
         self.__irParaOPrimeiro()    
-        self.__avancarKPosicoes(pos)
+        self.__avancarKPosicoes(pos - 1)
 
         self.ExcluirAtual()
 
         self.__quantidade -= 1
 
+    #feito
     def Buscar(self, el):
         self.__irParaOPrimeiro()
 
-        while True:
-            if self.__cursor.getDado() == el:
-                return True
-            
-            if self.__cursor == self.__ult:
-                break
-            
-            self.__avancarKPosicoes(1)
+        self.__ult.setProx(el)
 
-        return False
-    
+        while True:
+            if self.__cursor.getDado() == el.getDado():
+                break
+
+            self.__avancarKPosicoes(1)
+            
+        if self.__cursor == self.__ult.getProx():
+            busca = False
+
+        else:
+            busca = True
+        
+        self.__ult.setProx(None)
+        return busca
+
     #feito
     def PosicaoDe(self, el) -> int:
         self.__irParaOPrimeiro()
-        contador = 0
+        self.__ult.setProx(el)
+
+        contador = 1
+
         while True:
-            if self.__cursor.getDado() == el:
-                return contador
-            
-            if self.__cursor == self.__ult:
-                print("Excecao")
+            if self.__cursor.getDado() == el.getDado():
                 break
-            
-            self.__avancarKPosicoes(1)
+
             contador += 1
+            self.__avancarKPosicoes(1)
+
+        if self.__cursor == self.__ult.getProx():
+            self.__ult.setProx(None)
+            print("Exceção")
+
+        else:
+            self.__ult.setProx(None)
+            return contador
         
 
-    #feito
     def AcessaPrimeiro(self):
         return self.__prim.getDado()
     
-    #feito
+    
     def AcessaUltimo(self):
         return self.__ult.getDado()
     
-    #feito
+    
     def MostrarTudo(self):
         iterador = self.__prim
 
