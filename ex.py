@@ -1,3 +1,6 @@
+#Alunos: Eduardo Boçon e Jiliard Peifer.
+
+
 class objeto():
 
     def __init__(self, dado):
@@ -65,6 +68,28 @@ class lista():
             return True
         return False
     
+    #feito
+    def __PosicaoDe(self, el) -> int:
+        self.__irParaOPrimeiro()
+        self.__ult.setProx(el)
+
+        contador = 1
+
+        while True:
+            if self.__cursor.getDado() == el.getDado():
+                break
+
+            contador += 1
+            self.__avancarKPosicoes(1)
+
+        if self.__cursor == self.__ult.getProx():
+            self.__ult.setProx(None)
+            print("Exceção")
+
+        else:
+            self.__ult.setProx(None)
+            return contador
+
     #feito
     def acessarAtual(self):
         return self.__cursor.getDado()
@@ -214,29 +239,7 @@ class lista():
         self.__ult.setProx(None)
         return busca
 
-    #feito
-    def PosicaoDe(self, el) -> int:
-        self.__irParaOPrimeiro()
-        self.__ult.setProx(el)
-
-        contador = 1
-
-        while True:
-            if self.__cursor.getDado() == el.getDado():
-                break
-
-            contador += 1
-            self.__avancarKPosicoes(1)
-
-        if self.__cursor == self.__ult.getProx():
-            self.__ult.setProx(None)
-            print("Exceção")
-
-        else:
-            self.__ult.setProx(None)
-            return contador
-        
-
+ 
     def AcessaPrimeiro(self):
         return self.__prim.getDado()
     
