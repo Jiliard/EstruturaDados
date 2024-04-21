@@ -238,8 +238,8 @@ class lista():
         
         self.__ult.setProx(None)
         return busca
- 
 
+ 
     def AcessaPrimeiro(self):
         return self.__prim.getDado()
     
