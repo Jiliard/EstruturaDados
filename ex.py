@@ -27,7 +27,7 @@ class objeto():
         self.__anter = anter
 
 
-class lista():
+class ListaDuplamenteEncadeada():
 
     def __init__(self, tamanho = 30):
         self.__prim = None
@@ -39,11 +39,17 @@ class lista():
     #feito
     def __avancarKPosicoes(self, k):
         for i in range(k):
+            if self.__cursor == self.__ult:
+                break
+
             self.__cursor = self.__cursor.getProx()
 
     #feito
     def __retrocederKPosicoes(self, k):
         for i in range(k):
+            if self.__cursor == self.__prim:
+                break
+
             self.__cursor = self.__cursor.getAnter()
 
     #feito
@@ -173,13 +179,16 @@ class lista():
 
     #feito
     def ExcluirAtual(self):
-        if self.__cursor.getProx() != None:
+        if self.__cursor == self.__prim:
+            self.ExcluirPrim()
+        
+        elif self.__cursor == self.__ult:
+            self.ExcluirUlt()
+        
+        else:
             self.__cursor.getProx().setAnter(self.__cursor.getAnter())
-
-        if self.__cursor.getAnter() != None:
             self.__cursor.getAnter().setProx(self.__cursor.getProx())      
-
-        self.__avancarKPosicoes(1)
+            self.__avancarKPosicoes(1)
 
         self.__quantidade -= 1
         
@@ -193,6 +202,7 @@ class lista():
             self.__prim.setAnter(None)
 
         self.__quantidade -= 1
+        self.__cursor = self.__prim
 
     #feito
     def ExcluirUlt(self):
@@ -204,6 +214,7 @@ class lista():
             self.__ult.setProx(None)
 
         self.__quantidade -= 1
+        self.__cursor = self.__ult
 
     #feito
     def ExcluirElemento(self, el):
@@ -275,8 +286,27 @@ class lista():
             if iterador.getProx() == None: break
             iterador = iterador.getProx()
 
-lista = lista()
+lista = ListaDuplamenteEncadeada()
 
 lista.InserirComoPrimeiro(1)
 lista.InserirComoUltimo(2)
-lista.InserirDepoisDoAtual(3)
+lista.InserirAntesDoAtual(3)
+lista.MostrarTudo()
+#esperado = 1 3 2
+print('------')
+
+lista.InserirDepoisDoAtual(4)
+lista.InserirComoPrimeiro(0)
+lista.ExcluirUlt()
+lista.MostrarTudo()
+#esperado = 0 1 3 4 
+print('------')
+
+lista.ExcluirDaPos(2)
+lista.ExcluirElemento(4)
+lista.MostrarTudo()
+#esperado = 0 3 
+print('------')
+
+#esperado = True 
+print(lista.Buscar(0))
